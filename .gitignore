@@ -6,3 +6,6 @@ platforms/
 plugins/
 
 freeroll-front.sublime-workspace
+
+keycloak.json
+www/js/bundle.js
