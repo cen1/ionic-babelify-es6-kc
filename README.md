@@ -8,10 +8,13 @@ Based on *kitbrennan90/ionic-babel-browserify-es6* but heavily modified. Uses ES
 2. Create a public OAuth client. Set Valid redirect URI to http://* and Web Origins to * in order to avoid CORS and redirect problems during development.
 3. Place client's keycloak.json into www folder. 
 4. Install fake REST server: `npm install -g json-server` and run it with `json-server --host 0.0.0.0 --watch fakerest/db.json`
-5. `gulp js` and `ionic serve`
+5. Change js/config.js with the correct API URL. 
+6. `gulp js` and `ionic serve`
 
 The resulting app is actually something you can start working with in a real world scenario, providing:
 - User login
 - Actual REST calls with correct Authorization header
 - modularized Angular files
 - ES6 support (aww yea!)
+
+Additional changes like modularized state files and .tpl files for keycloak.json and config.js are possible but I think this is a good start as it is.
