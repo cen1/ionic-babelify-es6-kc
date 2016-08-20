@@ -5,7 +5,7 @@ Based on *kitbrennan90/ionic-babel-browserify-es6* but heavily modified. Uses ES
 
 # Setup instructions
 1. Install Keycloak and register with an identity provider of your choice. I recommend exposing your Keycloak server on a public domain over HTTPS to avoid problems with identity provider integration and unexpected self-signed certificate troubles. https://keycloak.gitbooks.io/securing-client-applications-guide/content/v/2.1/topics/oidc/javascript-adapter.html
-2. Create a public OAuth client. Set Valid redirect URI to http://* and Web Origins to * in order to avoid CORS and redirect problems during development.
+2. in Keycloak admin console, create a public OAuth client. Set Valid redirect URI to `http://*` and Web Origins to `*` in order to avoid CORS and redirect problems during development.
 3. Place client's keycloak.json into www folder. 
 4. Install fake REST server: `npm install -g json-server` and run it with `json-server --host 0.0.0.0 --watch fakerest/db.json`
 5. Change js/config.js with the correct API URL. 
