@@ -1,17 +1,17 @@
 import subModule from './submodule'
 
-export default subModule.factory('authInterceptor', ($rootScope, $q) => {
+export default subModule.factory('authInterceptor', ($q, Auth) => {
 
     return {
         request(config) {
             let deferred = $q.defer();
 
-            if ($rootScope.keycloak.token) {
+            if (Auth.token) {
                 
-                $rootScope.keycloak.updateToken(30).success(() => {
+                Auth.updateToken(30).success(() => {
 
                     config.headers = config.headers || {};
-                    config.headers.Authorization = 'Bearer ' + $rootScope.keycloak.token;
+                    config.headers.Authorization = 'Bearer ' + Auth.token;
                     deferred.resolve(config);
                 }).error(() => {
                     deferred.reject({status: 401});

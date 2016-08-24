@@ -1,6 +1,7 @@
 import controllers from './controllers';
 import interceptors from './interceptors';
 import rest from './rest';
+import Auth from './auth';
 import states from './states/states';
 import Keycloak from 'keycloak-js';
 
@@ -9,9 +10,9 @@ import Keycloak from 'keycloak-js';
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.rest', 'starter.interceptors'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.rest', 'starter.interceptors', 'starter.auth'])
 
-.run(function($rootScope, $state, $ionicPlatform) {
+.run(function($rootScope, $state, $ionicPlatform, Auth) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -27,14 +28,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.rest', 'star
       StatusBar.styleDefault();
     }
 
-    $rootScope.keycloak = window.keycloak;
-
     //Kc auth state listener
     $rootScope.$on('$stateChangeStart', (event, toState) => {
 
         if (toState.requiresAuth) {
             console.log("State requires authentication");
-            if ($rootScope.keycloak.authenticated) {
+            if (Auth.authenticated) {
                 console.log("Client already authenticated");
                 if (toState.requiredRoles && toState.requiredRoles
                         .filter((role) => auth.keycloak.realmAccess.roles.indexOf(role) == -1).length > 0) {
@@ -51,7 +50,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.rest', 'star
     });
 
     $rootScope.$on('noAuthentication',(event, url) => {
-        $rootScope.keycloak.login({redirectUri: url});
+        Auth.login({redirectUri: url});
     });
   });
 })

@@ -1,6 +1,6 @@
 import subModule from './submodule'
 
-export default subModule.controller('DashCtrl', function($rootScope, $scope) {
+export default subModule.controller('DashCtrl', function($rootScope, $scope, Auth) {
     
-    $scope.user = $rootScope.keycloak.tokenParsed.name;
+    $scope.user = Auth.tokenParsed.name;
 });
